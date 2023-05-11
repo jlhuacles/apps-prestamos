@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejemplo D3.js</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+  <link href='https://unpkg.com/css.gg@2.0.0/icons/css/user-add.css' rel='stylesheet'>
+  <style>
+    /* Estilos para el div que mostrará los comentarios */
+    #tooltip {
+      position: absolute;
+      width: 30%;
+      height: 30%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      padding: 10px;
+      background-color: white;
+      border: 1px solid red;
+      border-radius: 5px;
+      pointer-events: none;
+      overflow: scroll;
+      
+
+    }
+
+    .item {
+      
+      margin: 0px 2px 10px 2px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+     
+    }
+
+    .item:hover{
+      background-color:red;
+    }
+    
+
+    /* Clase para mostrar el tooltip */
+    .tooltip-show {
+      visibility: visible;
+      opacity: 1;
+      display:flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
+      
+    }
+    .tooltip-hide {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+
+    /* Clase para ocultar el tooltip */
+   
+
+    #container {
+      max-width: 900px;
+      height:100vh;
+      margin: 0 auto 25px;
+      display: block;
+      box-sizing: border-box;
+      overflow-x: scroll;
+      
+      
+    }
+
+    .user{
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .item-seleccionado{
+      background-color: red;
+    }
+
+    @media (min-width:500px) {
+      .item{
+        height: 30px;
+      }
+      #fa-user{
+        color: red;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div style="width: 100%; height:25px; border: 1px solid black"><i class="fa fa-user" aria-hidden="true"></i> </div>
+
+  <!-- Contenedor donde se mostrarán los iconos -->
+  <div id="container"></div>
+
+  <!-- Div para mostrar los comentarios -->
+  <div id="tooltip" class="tooltip-hide"></div>
+
+  <!-- Incluimos la librería de D3.js -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script>
+    // Leemos el archivo JSON con los nombres y comentarios
+    d3.json("data.json").then(function (data) {
+      // Creamos un i por cada objeto en el array "data"
+      var icons = d3.select("#container")
+        .selectAll("i")
+        .data(data.data)
+        .enter()
+        .append("i")
+        .attr("class", "fa fa-user item")
+        
+      var isMobile = window.innerWidth < 499 && /Mobi/i.test(navigator.userAgent);
+      var eventIn = isMobile ? "touchstart" : "mouseover";
+      var eventOut = isMobile ? "touchend" : "mouseout"
+      // Mostramos el comentario al hacer hover sobre el icono
+      icons.on(eventIn, function (event, d) {
+        d3.select("#tooltip")
+          .html('<span class="user">'+d.Usuario +":"+"</span>"+  " <br> "+  " <br> " +'"'+d.Comentario + '"'+" <br> "+  " <br>Escrito el: " +d.fecha
+          +'<br>Puntuado con: '+d.Score + '★')
+          .attr("class", "tooltip-show"); 
+       
+      })
+
+      // Ocultamos el comentario al quitar el cursor del icono
+      icons.on(eventOut, function (event, d) {
+        d3.select("#tooltip").attr("class", "tooltip-hide");
+        
+      });
+   
+      
+    });
+
+    
+  </script>
+</body>
+
+</html>
