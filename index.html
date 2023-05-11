@@ -961,7 +961,7 @@ h5.line {
     #tooltip {
       position: absolute;
       width: 50%;
-      height: 40%;
+      height: 50%;
       top: 555vh;
       left: 0;
       right: 0;
@@ -981,8 +981,9 @@ h5.line {
       
       margin: 0px 4px 5px 4px;
         
-      background-color: #f4f4f4;
-      border-radius: 5px;
+      background-color: #ececec;
+      border-radius: 1px;
+      transition: all 0.5s ease-out;
      
     }
 
@@ -1002,11 +1003,13 @@ h5.line {
       justify-content: center;
       text-align: center;
       gap: 10px;
+      transition: opacity 0.2s ease-in-out;
       
     }
     .tooltip-hide {
         visibility: hidden;
         opacity: 0;
+        transition: opacity 0.2s ease-in-out;
     }
 
 
@@ -1015,7 +1018,7 @@ h5.line {
 
     #container {
       max-width: 900px;
-      height:100vh;
+      height:85vh;
       margin: 0 auto 25px;
       display: block;
       box-sizing: border-box;
@@ -1028,26 +1031,43 @@ h5.line {
       font-weight: bold;
       text-transform: uppercase;
     }
-
+    .fa-user{
+        font-size: 20px;
+    }
     .item-seleccionado{
       background-color: red;
     }
+    .titulo-viz{
+        text-align: center;
+    }
+    .number{
+        font-size: 50px;
+        font-weight: bold;
+        
+    }
+
+    
 
     @media (max-width:500px) {
       .item{
-        height: 30px;
+        height: 20px;
       }
-      #fa-user{
-        color: red;
+
+      
+      .fa-user{
+        color: gray;
+        
+
       }
       #tooltip{
         width: 60%;
+        height: 45%;
         border: 1px solid red;
-        top: 600vh;
+        top: 590vh;
         font-size: 10px !important;
       }
       .container{
-        max-width: 80%;
+        max-width: 70%;
         margin: 0 auto;
       }
     }
@@ -1124,6 +1144,10 @@ h5.line {
         <!-- Div para mostrar los comentarios -->
         
             <div class="texto-lr">
+                <div class="number titulo-viz">7082 quejas</div>
+                <div class="titulo-viz"> Personas que han sufrido por las aplicaciones de préstamo se quejan a través de Google Play Store,  esta es una breve historia de la Google Play Store
+                    de la infructuosa lucha por evitar la continua amenaza y la extorsión. Los comentarios datan del 2022 y este año, debido a que muchas aplicaciones desaparecen rápidamente.
+                </div>
                 <div id="container"><div id="tooltip" class="tooltip-hide"></div></div>
 
         <div id="content" style="margin-top: 0px;">
